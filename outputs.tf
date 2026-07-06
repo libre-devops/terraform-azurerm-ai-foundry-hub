@@ -1,3 +1,18 @@
+output "discovery_urls" {
+  description = "Map of hub name to its discovery URL."
+  value       = { for k, v in azurerm_ai_foundry.this : k => v.discovery_url }
+}
+
+output "identities" {
+  description = "Map of hub name to its managed identity { principal_id, tenant_id }."
+  value = {
+    for k, v in azurerm_ai_foundry.this : k => try({
+      principal_id = v.identity[0].principal_id
+      tenant_id    = v.identity[0].tenant_id
+    }, null)
+  }
+}
+
 output "ids" {
   description = "Map of hub name to its resource id."
   value       = { for k, v in azurerm_ai_foundry.this : k => v.id }
@@ -11,26 +26,6 @@ output "ids_zipmap" {
 output "names" {
   description = "The hub names."
   value       = keys(azurerm_ai_foundry.this)
-}
-
-output "discovery_urls" {
-  description = "Map of hub name to its discovery URL."
-  value       = { for k, v in azurerm_ai_foundry.this : k => v.discovery_url }
-}
-
-output "workspace_ids" {
-  description = "Map of hub name to its immutable workspace id."
-  value       = { for k, v in azurerm_ai_foundry.this : k => v.workspace_id }
-}
-
-output "identities" {
-  description = "Map of hub name to its managed identity { principal_id, tenant_id }."
-  value = {
-    for k, v in azurerm_ai_foundry.this : k => try({
-      principal_id = v.identity[0].principal_id
-      tenant_id    = v.identity[0].tenant_id
-    }, null)
-  }
 }
 
 output "project_ids" {
@@ -61,4 +56,9 @@ output "subscription_id" {
 output "tags" {
   description = "The tags applied to the hubs."
   value       = var.tags
+}
+
+output "workspace_ids" {
+  description = "Map of hub name to its immutable workspace id."
+  value       = { for k, v in azurerm_ai_foundry.this : k => v.workspace_id }
 }

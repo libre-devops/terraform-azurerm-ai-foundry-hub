@@ -34,7 +34,7 @@ the modern project-based Foundry instead: see the note below.
 > Storage and is the Azure AI Foundry portal default:
 > [`cognitive-account`](https://registry.terraform.io/modules/libre-devops/cognitive-account/azurerm/latest)
 > (an AIServices account) plus
-> [`ai-foundry-project`](https://registry.terraform.io/modules/libre-devops/ai-foundry-project/azurerm/latest).
+> [`ai-foundry-project`](https://registry.terraform.io/modules/libre-devops/ai-foundry-project/azapi/latest).
 >
 > Reach for this hub module only when you specifically need the ML hub: prompt flow, managed compute,
 > or fine-tuning flows that the hub uniquely supports.
